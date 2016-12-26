@@ -26,4 +26,5 @@ if __name__ == '__main__':
     config = load_json('config.json')
     bot.command_prefix = config['prefix']
     bot.load_extension('commands.admin')
+    bot.load_extension('commands.raffle')
     bot.run(config['token'])
