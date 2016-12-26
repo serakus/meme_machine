@@ -1,23 +1,13 @@
 import discord
 import asyncio
 from discord.ext import commands
-import message_processor
-from util import log
-from util import load_json
+from responses.message_processor import message_processor
+from util.util import log
+from util.util import load_json
+import sys
 
 bot = commands.Bot(command_prefix='!')
-proc = message_processor.message_processor(bot, load_json('responses.json')['random'])
-
-@bot.event
-async def on_command_error(error, ctx):
-    if isinstance(error, commands.NoPrivateMessage):
-        await bot.send_message(ctx.message.author, 'This command cannot be used in private messages.')
-    elif isinstance(error, commands.DisabledCommand):
-        await bot.send_message(ctx.message.author, 'Sorry. This command is disabled and cannot be used.')
-    elif isinstance(error, commands.CommandInvokeError):
-        print('In {0.command.qualified_name}:'.format(ctx), file=sys.stderr)
-        traceback.print_tb(error.original.__traceback__)
-        print('{0.__class__.__name__}: {0}'.format(error.original), file=sys.stderr)
+proc = message_processor(bot, load_json('responses/responses.json')['random'])
 
 @bot.event
 async def on_ready():
@@ -35,5 +25,5 @@ async def on_message(message):
 if __name__ == '__main__':
     config = load_json('config.json')
     bot.command_prefix = config['prefix']
-    #bot.load_extension('message_processor')
+    bot.load_extension('commands.admin')
     bot.run(config['token'])
