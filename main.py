@@ -7,7 +7,7 @@ from util.util import load_json
 import sys
 
 bot = commands.Bot(command_prefix='!')
-proc = message_processor(bot, load_json('responses/responses.json')['random'])
+proc = message_processor(bot, load_json('responses/responses.json'))
 
 @bot.event
 async def on_ready():
