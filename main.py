@@ -29,4 +29,5 @@ if __name__ == '__main__':
     bot.command_prefix = config['prefix']
     bot.load_extension('commands.admin')
     bot.load_extension('commands.raffle')
+    bot.load_extension('commands.mod')
     bot.run(config['token'])
