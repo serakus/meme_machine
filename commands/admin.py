@@ -3,6 +3,7 @@ from util import checks
 import discord
 import datetime
 
+
 class admin:
 
     def __init__(self, bot):
@@ -10,7 +11,7 @@ class admin:
 
     @commands.command(hidden=True)
     @checks.is_owner()
-    async def load(self, *, module : str):
+    async def load(self, *, module: str):
         try:
             self.bot.load_extension(module)
         except Exception as e:
@@ -21,7 +22,7 @@ class admin:
 
     @commands.command(hidden=True)
     @checks.is_owner()
-    async def unload(self, *, module : str):
+    async def unload(self, *, module: str):
         try:
             self.bot.unload_extension(module)
         except Exception as e:
@@ -32,7 +33,7 @@ class admin:
 
     @commands.command(name='reload', hidden=True)
     @checks.is_owner()
-    async def _reload(self, *, module : str):
+    async def _reload(self, *, module: str):
         try:
             self.bot.unload_extension(module)
             self.bot.load_extension(module)
@@ -41,6 +42,7 @@ class admin:
             await self.bot.say('{}: {}'.format(type(e).__name__, e))
         else:
             await self.bot.say('\N{OK HAND SIGN}')
+
 
 def setup(bot):
     bot.add_cog(admin(bot))

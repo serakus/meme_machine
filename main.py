@@ -9,17 +9,19 @@ import sys
 bot = commands.Bot(command_prefix='!')
 proc = message_processor(bot, load_json('responses/responses.json'))
 
+
 @bot.event
 async def on_ready():
     log('Logged in as {0.user.name}'.format(bot))
+
 
 @bot.event
 async def on_message(message):
     if message.author.bot:
         return
-    if not message.content.startswith('!') and bot.user.mention in message.content :
+    if not message.content.startswith('!') and bot.user.mention in message.content:
         await proc.process_message(message)
-    else :
+    else:
         await bot.process_commands(message)
 
 if __name__ == '__main__':

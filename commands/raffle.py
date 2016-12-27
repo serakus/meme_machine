@@ -5,6 +5,7 @@ from datetime import datetime
 import discord
 import random
 
+
 class raffle:
 
     def __init__(self, bot):
@@ -22,9 +23,10 @@ class raffle:
         else:
             self.started = True
             self.desc = desc
+
             def end_check(m):
                 return False
-            self.time = float(time)*60
+            self.time = float(time) * 60
             self.now = datetime.now()
             self.members = []
             await self.bot.say('Raffle "{0}" is starting! You have {1} min left to join!'.format(desc, time))
@@ -49,6 +51,7 @@ class raffle:
                 await self.bot.say('There is currently no raffle!')
             else:
                 await self.bot.say('{0}, you already joined the raffle!'.format(ctx.message.author.mention))
+
 
 def setup(bot):
     bot.add_cog(raffle(bot))

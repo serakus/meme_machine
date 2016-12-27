@@ -2,6 +2,7 @@ import asyncio
 from util.util import log
 import random
 
+
 class message_processor:
 
     def __init__(self, bot, responses):
@@ -13,8 +14,8 @@ class message_processor:
         if '?' in content:
             await self.reply(random.choice(self.responses['magic']), message)
         elif 'rate' in content:
-            await self.reply('{0}/10'.format(random.randint(0,10)), message)
-        else :
+            await self.reply('{0}/10'.format(random.randint(0, 10)), message)
+        else:
             await self.reply(random.choice(self.responses['random']), message)
 
     async def reply(self, message, ctx):
